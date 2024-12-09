@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego del Ahorcado</title>
+    <!-- Fuente Lobster -->
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Librería para confeti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.2"></script>
+</head>
+<body>
+    <div class="game-container">
+        <h1>💀 Juego del Ahorcado ⚔️ </h1>
+        
+        <div class="category-container">
+            <label for="category-select">Selecciona una categoría:</label>
+            <select id="category-select">
+                <option value="comida">Comida</option>
+                <option value="animales">Animales</option>
+                <option value="tecnologia">Tecnología</option>
+            </select>
+            <button id="start-game-button">Comenzar Juego</button>
+        </div>
+
+        <div class="game-content">
+            <p id="word"></p>
+            <p id="message"></p>
+            <p id="wrong-letters"></p>
+            <div id="figure-container"></div>
+            <div id="letters-container"></div>
+            <p>Presiona una letra en tu teclado o haz clic en las letras para jugar.</p>
+            <button id="restart-button">Reiniciar</button>
+        </div>
+
+        </div>
+    <script src="script.js"></script>
+</body>
+</html>
