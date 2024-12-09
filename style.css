@@ -1,5 +1,4 @@
 body {
-<<<<<<< HEAD
     font-family: Arial;
     display: flex;
     justify-content: center;
@@ -104,60 +103,3 @@ h1 {
     background-color: #a4a4a4;
     cursor: not-allowed;
 }
-=======
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-  }
-  
-  .container {
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  h1 {
-    font-size: 24px;
-  }
-  
-  canvas {
-    background: #eee;
-    margin: 20px auto;
-    display: block;
-    border: 1px solid #ccc;
-  }
-  
-  #input-letra {
-    padding: 10px;
-    font-size: 16px;
-    width: 50px;
-    text-align: center;
-  }
-  
-  button {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin: 10px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  #resultado {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-  }
-  
->>>>>>> 702191f9518146d2cebab3a41b12e2c5e860562a
