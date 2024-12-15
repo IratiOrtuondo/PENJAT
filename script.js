@@ -4,13 +4,6 @@ const categoryWords = {
     tecnologia: ['computadora', 'internet', 'teclado', 'pantalla', 'programacion']
 };
 
-let selectedCategory = '';
-let selectedWord = '';
-let guessedWord = [];
-let wrongGuesses = 0;
-const maxWrongGuesses = 7;
-
-
 const wordDisplay = document.getElementById('word');
 const message = document.getElementById('message');
 const wrongLettersDisplay = document.getElementById('wrong-letters');
@@ -24,19 +17,24 @@ const gameContent = document.querySelector('.game-content');
 const loseAudio = new Audio('defeat.mp3');
 const winAudio = new Audio('victory.mp3');
 const correct = new Audio('correct.mp3');
+const maxWrongGuesses = 7;
 
-const hangmanImages = [
-    "fig1.JPG",
-    "fig2.JPG",
-    "fig3.JPG",
-    "fig4.JPG",
-    "fig5.JPG",
-    "fig6.JPG",
-    "fig7.JPG",
-    "fig8.JPG"
-];
+let selectedCategory = '';
+let selectedWord = '';
+let guessedWord = [];
+let wrongGuesses = 0;
 
 function updateHangmanImage() { //solo crear imagen una vez
+    const hangmanImages = [
+        "fig1.JPG",
+        "fig2.JPG",
+        "fig3.JPG",
+        "fig4.JPG",
+        "fig5.JPG",
+        "fig6.JPG",
+        "fig7.JPG",
+        "fig8.JPG"
+    ];
     figureContainer.innerHTML = '';
     const img = document.createElement('img');
     img.src = hangmanImages[wrongGuesses];
@@ -64,7 +62,6 @@ function stopAllAudios() {
 }
 
 function initGame() {
-    stopAllAudios();
     const words = categoryWords[selectedCategory];
     selectedWord = words[Math.floor(Math.random() * words.length)].toUpperCase();
     guessedWord = Array(selectedWord.length).fill('_');
