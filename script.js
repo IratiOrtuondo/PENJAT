@@ -35,10 +35,16 @@ function updateHangmanImage() { //solo crear imagen una vez
         "fig7.JPG",
         "fig8.JPG"
     ];
-    figureContainer.innerHTML = '';
-    const img = document.createElement('img');
-    img.src = hangmanImages[wrongGuesses];
-    figureContainer.appendChild(img);
+        // Si la imagen no existe aún, la creamos una vez
+        if (!figureContainer.querySelector('img')) {
+            const img = document.createElement('img');
+            figureContainer.appendChild(img);
+        }
+    
+        // Actualiza el src de la imagen directamente
+        const img = figureContainer.querySelector('img');
+        img.src = hangmanImages[wrongGuesses];
+
 }
 
  function generateLetterButtons() { //una vez generados no volverlo a hacer cada partida solo en la primera
