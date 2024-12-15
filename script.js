@@ -19,10 +19,11 @@ const lettersContainer = document.getElementById('letters-container');
 const restartButton = document.getElementById('restart-button');
 const categorySelect = document.getElementById('category-select');
 const startGameButton = document.getElementById('start-game-button');
-const categoryContainer = document.querySelector('.category-container');
+const categoryContainer = document.querySelector('.category-container'); //seleccionar un elemento del DOM
 const gameContent = document.querySelector('.game-content');
 const loseAudio = new Audio('defeat.mp3');
 const winAudio = new Audio('victory.mp3');
+const correct = new Audio('correct.mp3');
 
 const hangmanImages = [
     "fig1.JPG",
@@ -35,26 +36,25 @@ const hangmanImages = [
     "fig8.JPG"
 ];
 
-function updateHangmanImage() {
+function updateHangmanImage() { //solo crear imagen una vez
     figureContainer.innerHTML = '';
     const img = document.createElement('img');
     img.src = hangmanImages[wrongGuesses];
-    img.style.margin = "0 auto"; 
-    img.style.width = "450px";
     figureContainer.appendChild(img);
 }
 
-function generateLetterButtons() {
-    lettersContainer.innerHTML = '';
+ function generateLetterButtons() { //una vez generados no volverlo a hacer cada partida solo en la primera
+
+     lettersContainer.innerHTML = '';
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    for (const letter of alphabet) {
-        const button = document.createElement('button');
-        button.textContent = letter;
-        button.className = 'letter-btn';
-        button.addEventListener('click', () => handleLetterInput(letter, button));
+     for (const letter of alphabet) {
+         const button = document.createElement('button');
+         button.textContent = letter;
+         button.className = 'letter-btn';
+        button.addEventListener('click', () => handleLetterInput(letter, button)); //!
         lettersContainer.appendChild(button);
-    }
-}
+     }
+} 
 
 function stopAllAudios() {
     [winAudio, loseAudio].forEach(audio => {
@@ -72,21 +72,22 @@ function initGame() {
     gameEnded = false;
     message.textContent = '';
     wrongLettersDisplay.textContent = 'Letras incorrectas: ';
-    wordDisplay.textContent =guessedWord.join(' ');
+    wordDisplay.textContent =guessedWord.join(' '); //cadena de texto
     updateHangmanImage(); 
     generateLetterButtons();
     gameContent.style.display = 'block'; // Muestra el contenido del juego
     categoryContainer.style.display = 'none'; // Oculta la selección de categoría
 }
 
-function handleLetterInput(letter, button = null) {
+function handleLetterInput(letter, button) {
     if (gameEnded) return;
     if (button) button.disabled = true;
 
     if (selectedWord.includes(letter)) {
         
-        selectedWord.split('').forEach((char, index) => {
-            if (char === letter) guessedWord[index] = letter;
+        selectedWord.split('').forEach((char, index) => {  //!
+            if (char === letter) 
+                guessedWord[index] = letter;
         });
         wordDisplay.textContent = guessedWord.join(' ');
 
@@ -96,6 +97,12 @@ function handleLetterInput(letter, button = null) {
             winAudio.play();
             lanzarConfeti();
             endGame();
+            
+        }
+        else {
+            // Suena correct solo si no ha ganado aún
+            correct.currentTime = 0;
+            correct.play();
         }
     } else {
         
@@ -119,7 +126,7 @@ function lanzarConfeti() {
     (function frame() {
         confetti({
             particleCount: 10,
-            angle: Math.random() * 360,
+            angle: Math.random() * 360, //aleatorio (de 0° a 360°) para dispersar los confetis en diferentes direcciones
            
         });
         if (Date.now() < end) {
@@ -130,7 +137,12 @@ function lanzarConfeti() {
 }
 
 function endGame() {
-    document.querySelectorAll('.letter-btn').forEach(btn => (btn.disabled = true));
+    // const buttons = document.querySelectorAll('.letter-btn');
+    // for (let i = 0; i < buttons.length; i++) {
+    //     buttons[i].disabled = true; // Deshabilita cada botón
+    // }
+     document.querySelectorAll('.letter-btn').forEach(btn => (btn.disabled = true)); //con callback
+
 }
 
 startGameButton.addEventListener('click', () => {
@@ -142,14 +154,13 @@ restartButton.addEventListener('click', () => {
     stopAllAudios(); // Detiene cualquier música en curso al reiniciar
     gameContent.style.display = 'none'; // Oculta el contenido del juego
     categoryContainer.style.display = 'block'; // Muestra la selección de categoría
-    selectedCategory = '';
 });
 
 // Permite escribir letras con el teclado
-document.addEventListener('keydown', event => {
+document.addEventListener('keydown', event => { // document, captura eventos globales en la página Este manejador capturará la tecla presionada sin importar dónde esté el usuario l objeto document te permite acceder y manipular cualquier parte de la página
     const letter = event.key.toUpperCase();
     if (/^[A-Z]$/.test(letter)) { 
-        const button = Array.from(document.querySelectorAll('.letter-btn')).find(btn => btn.textContent === letter);
+        const button = Array.from(document.querySelectorAll('.letter-btn')).find(btn => btn.textContent === letter); //para poder usar el find
         if (button && !button.disabled) handleLetterInput(letter, button);
     }
 });

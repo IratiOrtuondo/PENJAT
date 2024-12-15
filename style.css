@@ -3,26 +3,37 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     background: #96dfff;
     color: hsl(251, 82%, 17%);
+    height: auto; /* Permite que crezca más allá de la ventana */
+    
+    
 }
 .game-container {
     text-align: center;
-
+    
 }
-
+ 
 h1 {
+    
     font-family: 'Lobster';
     font-size: 4rem;
-    margin-bottom: 20px;
+    margin-bottom: 5%;
     color: #17a379;
-     
+    
 }
 
 #category-select {
     padding: 10px;
     font-size: 16px;
+    
+}
+
+#hangman-image {
+    display: block;
+    max-width: 300px; 
+    margin-left:28% ;
+    margin-top: 15%;
 }
 
 #start-game-button {
@@ -35,8 +46,9 @@ h1 {
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
-    
+        
 }
+ 
 
 #start-game-button:hover {
     background-color: #218838;
@@ -64,8 +76,12 @@ h1 {
     padding: 10px;
     background-color: #fff;
     margin: 20px auto;
-    width: 43%;
+    width: 50%;
+    
 }
+#figure-container img {
+    max-width: 100%; /* La imagen no será más ancha que su contenedor */
+   }
 
 #restart-button {
     margin-top: 20px;
@@ -103,3 +119,4 @@ h1 {
     background-color: #a4a4a4;
     cursor: not-allowed;
 }
+
