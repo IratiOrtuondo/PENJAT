@@ -5,10 +5,9 @@ body {
     align-items: center;
     background: #96dfff;
     color: hsl(251, 82%, 17%);
-    height: auto; /* Permite que crezca más allá de la ventana */
-    
-    
+    height: auto; /* Permite que crezca más allá de la ventana */     
 }
+
 .game-container {
     text-align: center;
     

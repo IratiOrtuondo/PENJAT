@@ -9,7 +9,7 @@ let selectedWord = '';
 let guessedWord = [];
 let wrongGuesses = 0;
 const maxWrongGuesses = 7;
-let gameEnded = false;
+
 
 const wordDisplay = document.getElementById('word');
 const message = document.getElementById('message');
@@ -69,7 +69,6 @@ function initGame() {
     selectedWord = words[Math.floor(Math.random() * words.length)].toUpperCase();
     guessedWord = Array(selectedWord.length).fill('_');
     wrongGuesses = 0;
-    gameEnded = false;
     message.textContent = '';
     wrongLettersDisplay.textContent = 'Letras incorrectas: ';
     wordDisplay.textContent =guessedWord.join(' '); //cadena de texto
@@ -80,7 +79,6 @@ function initGame() {
 }
 
 function handleLetterInput(letter, button) {
-    if (gameEnded) return;
     if (button) button.disabled = true;
 
     if (selectedWord.includes(letter)) {
@@ -92,7 +90,6 @@ function handleLetterInput(letter, button) {
         wordDisplay.textContent = guessedWord.join(' ');
 
         if (!guessedWord.includes('_')) {
-            gameEnded = true;
             message.textContent = '🎉 ¡Ganaste! 🎉';
             winAudio.play();
             lanzarConfeti();
@@ -111,7 +108,6 @@ function handleLetterInput(letter, button) {
         updateHangmanImage();
 
         if (wrongGuesses === maxWrongGuesses) {
-            gameEnded = true;
             message.textContent = `❌ Perdiste. La palabra era: ${selectedWord}`;
             loseAudio.play();
             endGame();
