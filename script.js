@@ -68,6 +68,7 @@ function stopAllAudios() {
 }
 
 function initGame() {
+   
     const words = categoryWords[selectedCategory];
     selectedWord = words[Math.floor(Math.random() * words.length)].toUpperCase();
     guessedWord = Array(selectedWord.length).fill('_');
@@ -76,7 +77,11 @@ function initGame() {
     wrongLettersDisplay.textContent = 'Letras incorrectas: ';
     wordDisplay.textContent =guessedWord.join(' '); //cadena de texto
     updateHangmanImage(); 
-    generateLetterButtons();
+    if (lettersContainer.childElementCount > 0) {
+        resetButtons();
+    } else {
+        generateLetterButtons();
+    }
     gameContent.style.display = 'block'; // Muestra el contenido del juego
     categoryContainer.style.display = 'none'; // Oculta la selección de categoría
 }
@@ -163,6 +168,12 @@ document.addEventListener('keydown', event => { // document, captura eventos glo
         if (button && !button.disabled) handleLetterInput(letter, button);
     }
 });
+
+function resetButtons() {
+    document.querySelectorAll('.letter-btn').forEach((button) => {
+        button.disabled = false;
+    });
+}
 
 // Oculta el contenido del juego al cargar
 gameContent.style.display = 'none';
