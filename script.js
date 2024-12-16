@@ -47,9 +47,8 @@ function updateHangmanImage() { //solo crear imagen una vez
 
 }
 
- function generateLetterButtons() { //una vez generados no volverlo a hacer cada partida solo en la primera
+function generateLetterButtons() { //una vez generados no volverlo a hacer cada partida solo en la primera
 
-     lettersContainer.innerHTML = '';
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
      for (const letter of alphabet) {
          const button = document.createElement('button');
@@ -60,12 +59,23 @@ function updateHangmanImage() { //solo crear imagen una vez
      }
 } 
 
+function resetButtons() {
+    document.querySelectorAll('.letter-btn').forEach((button) => {
+        button.disabled = false;
+    });
+}
+
 function stopAllAudios() {
     [winAudio, loseAudio].forEach(audio => {
         audio.pause();
         audio.currentTime = 0;
     });
 }
+
+startGameButton.addEventListener('click', () => {
+    selectedCategory = categorySelect.value;
+    initGame();
+});
 
 function initGame() {
    
@@ -149,11 +159,6 @@ function endGame() {
 
 }
 
-startGameButton.addEventListener('click', () => {
-    selectedCategory = categorySelect.value;
-    initGame();
-});
-
 restartButton.addEventListener('click', () => {
     stopAllAudios(); // Detiene cualquier música en curso al reiniciar
     gameContent.style.display = 'none'; // Oculta el contenido del juego
@@ -168,12 +173,6 @@ document.addEventListener('keydown', event => { // document, captura eventos glo
         if (button && !button.disabled) handleLetterInput(letter, button);
     }
 });
-
-function resetButtons() {
-    document.querySelectorAll('.letter-btn').forEach((button) => {
-        button.disabled = false;
-    });
-}
 
 // Oculta el contenido del juego al cargar
 gameContent.style.display = 'none';
