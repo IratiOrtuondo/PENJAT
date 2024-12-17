@@ -35,11 +35,6 @@ function updateHangmanImage() { //solo crear imagen una vez
         "fig7.JPG",
         "fig8.JPG"
     ];
-        // Si la imagen no existe aún, la creamos una vez
-        if (!figureContainer.querySelector('img')) {
-            const img = document.createElement('img');
-            figureContainer.appendChild(img);
-        }
     
         // Actualiza el src de la imagen directamente
         const img = figureContainer.querySelector('img');

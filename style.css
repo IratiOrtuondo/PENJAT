@@ -118,6 +118,7 @@ h1 {
     background-color: #a4a4a4;
     cursor: not-allowed;
 }
+
 @media (max-width: 768px) {
     .game-container {
         transform: scale(0.8); /* Escala al 80% */
